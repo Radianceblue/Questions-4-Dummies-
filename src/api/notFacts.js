@@ -1,8 +1,11 @@
-const BASE_URL = 'https://notfacts.org/api?query="random"';
+const BASE_URL = 'https://notfacts.org/api?query=';
 
-const getNotFact = async () => {
-  const response = await fetch(`${BASE_URL}`);
+const getNotFact = async (query = 'random') => {
+  const response = await fetch(`${BASE_URL}${encodeURIComponent(query)}`);
+  if (!response.ok) {
+    throw new Error('Could not fetch not facts');
+  }
   const data = await response.json();
-  return data;
+  return data.facts;
 };
 export { getNotFact };
