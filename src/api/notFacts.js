@@ -1,6 +1,5 @@
 const BASE_URL = 'https://notfacts.org/api?query=';
 
-
 const getNotFact = async (query) => {
   const response = await fetch(`${BASE_URL}${encodeURIComponent(query)}`);
   if (!response.ok) {
