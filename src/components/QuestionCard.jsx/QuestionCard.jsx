@@ -1,10 +1,12 @@
-import './QuestionCard.css';
 import { useState, useEffect } from 'react';
+import './QuestionCard.css';
 import { getNotFact } from '../../api/notFacts';
 import { randomFactsApi } from '../../api/randomFactsApi';
 import LetterA from '../../assets/LetterA.png';
 import LetterB from '../../assets/LetterB.png';
 import LetterC from '../../assets/LetterC.png';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const questionLetters = [LetterA, LetterB, LetterC];
 const extractWords = (text) => {
@@ -41,26 +43,29 @@ const QuestionCard = () => {
     };
     fetchData();
   }, []);
+
   return (
-    <div className="cards">
-      {facts.map((fact, index) => (
-        <div className="card" key={index}>
-          <div className="card-content">
-            <div className="card-image">
-              <img src={questionLetters[index]} alt="a letter" />
-            </div>
-            <div className="card-info-wrapper">
-              <div className="card-info">
-                <div className="card-info-title">
-                  <h3>Option {index + 1} </h3>
-                  <h4>{fact.text}</h4>
+    <Row className="justify-content-center">
+      <Col md={8}>
+        <div className="cards">
+          {facts.map((fact, index) => (
+            <div className="card w-25 h-50 p-3 justify-content-center" key={index}>
+              <div className="card-content">
+                <div className="card-image">
+                  <img src={questionLetters[index]} alt="a letter" />
+                </div>
+                <div className="card-info-wrapper">
+                  <div className="card-info">
+                    <h3>Option {index + 1} </h3>
+                    <p className="h6">{fact.text}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </Col>
+    </Row>
   );
 };
 
