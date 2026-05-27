@@ -5,6 +5,18 @@ const GameContext = createContext();
 export const GameProvider = ({ children }) => {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
+  const [round, setRound] = useState(0);
+
+  const startRound = () => {
+    setRound((prev) => {
+      const nextRound = prev + 1;
+      if (round >= 10) {
+        console.log('Game Over!');
+        return 10;
+      }
+      return nextRound;
+    });
+  };
 
   const handleUserAnswer = (isTrue) => {
     if (isTrue) {
@@ -16,7 +28,7 @@ export const GameProvider = ({ children }) => {
     }
   };
   return (
-    <GameContext.Provider value={{ correct, incorrect, handleUserAnswer }}>
+    <GameContext.Provider value={{ correct, incorrect, handleUserAnswer, startRound, round }}>
       {' '}
       {children}{' '}
     </GameContext.Provider>
