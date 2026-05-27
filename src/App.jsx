@@ -1,11 +1,14 @@
 import QuestionCard from './components/QuestionCard.jsx/QuestionCard.jsx';
-import Status from './components/Status/Status.jsx';
+import randomFactsApi from './api/randomFactsApi.js';
+import Status from "./components/Status/Status.jsx";
+import FavoriteButton from "./components/FavoriteButton/FavoriteButton.jsx";
 
-import './App.css';
+import './App.css'
+
 
 function App() {
-  // const [correct, setCorrect] = useState(0);
-  // const [incorrect, setIncorrect] = useState(0);
+  //const [correct, setCorrect] = useState(0);
+  //const [incorrect, setIncorrect] = useState(0);
 
   return (
     <div className="App">
