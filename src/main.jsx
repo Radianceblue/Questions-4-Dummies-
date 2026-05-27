@@ -7,8 +7,11 @@ import { GameProvider } from './context/GameLogic.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+
     <GameProvider>
       <App />
+      <LoadGifs />
     </GameProvider>
-  </StrictMode>,
+
+  </StrictMode>
 );
