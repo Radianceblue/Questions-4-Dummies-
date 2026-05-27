@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import randomFactsApi from './api/randomFactsApi.js';
-import Status from "./components/Status.jsx"
+import Status from "./components/Status/Status.jsx"
 
 import './App.css'
 

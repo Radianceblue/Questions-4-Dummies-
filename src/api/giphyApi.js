@@ -1,12 +1,21 @@
 const apiKey = import.meta.env.VITE_API_KEY;
+const BASE_URL = "https://api.giphy.com/v1/gifs/search?api_key="
+
 
 async function getGiphs(query){
-    const giphyResponse = await fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}`)
+    const giphResponse = await fetch(`${BASE_URL}${apiKey}&q=${query}&limit=1`)
 
-    const giphyData = await loadGifs.json();
+    if(!giphResponse.ok) {
+        throw new Error("Failed to load Giphs")
+        
+    } const giphyData = await giphResponse.json();
     
-    
-    //ha felhantering. 
+    console.log(giphyData);
+
+    return giphyData.data;
+  
 
     
 }
+
+export default getGiphs;
