@@ -1,0 +1,56 @@
+/* Custom button styling */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(
+    45deg,
+    rgb(20, 20, 20, 1) 0%,
+    rgb(60, 60, 60) 100%,
+    rgba(255, 255, 255, 1) 0%
+  );
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 15px rgba(55, 52, 57, 0.6);
+}
+
+.btn-glow:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(55, 52, 57, 0.9);
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 20%, transparent 60%);
+  transform: rotate(25deg);
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  to {
+    transform: translateX(100%) rotate(25deg);
+  }
+}
+
+h1 {
+  color: #cbc7c7;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.next-question-container {
+  margin-top: 2vh;
+}
