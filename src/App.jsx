@@ -12,7 +12,6 @@ function App() {
   //     // Släng in poäng hantering
   //   })
   // }o
-  
 
   return (
     <Container>
