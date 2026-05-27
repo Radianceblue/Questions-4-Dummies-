@@ -17,7 +17,7 @@ function App() {
     <Container>
       <div className="App">
         <h1 className="mt-2">Questions 4 Dummies</h1>
-        <Status correct={0} incorrect={0} />
+        <Status />
         <QuestionCard />
       </div>
     </Container>

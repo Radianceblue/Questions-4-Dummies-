@@ -1,4 +1,4 @@
-import { createContext, useState,  useContext} from 'react';
+import { createContext, useState, useContext } from 'react';
 
 const GameContext = createContext();
 
@@ -9,8 +9,10 @@ export const GameProvider = ({ children }) => {
   const handleUserAnswer = (isTrue) => {
     if (isTrue) {
       setCorrect((prev) => prev + 1);
+      console.log('Correct!');
     } else {
       setIncorrect((prev) => prev + 1);
+      console.log('Incorrect!');
     }
   };
   return (
