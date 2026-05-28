@@ -1,4 +1,4 @@
-import { createContext, useState,  useContext, useEffect} from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 const GameContext = createContext();
 
@@ -19,8 +19,8 @@ export const GameProvider = ({ children }) => {
   };
 
   const [favorites, setFavorites] = useState(() => {
-    const savedFacts = localStorage.getItem("favorited-facts");
-    
+    const savedFacts = localStorage.getItem('favorited-facts');
+
     if (savedFacts) {
       return JSON.parse(savedFacts);
     }
@@ -39,31 +39,23 @@ export const GameProvider = ({ children }) => {
   };
 
   const favoriteFact = (fact) => {
-    const alreadyFavorited = favorites.find(
-      (favorite) => favorite.id === fact.id
-    );
-    
+    const alreadyFavorited = favorites.find((favorite) => favorite.id === fact.id);
+
     if (alreadyFavorited) {
-      setFavorites(
-        favorites.filter(
-          (favorite) => favorite.id !== fact.id
-        )
-      );
+      setFavorites(favorites.filter((favorite) => favorite.id !== fact.id));
     } else {
       setFavorites([...favorites, fact]);
     }
   };
 
   useEffect(() => {
-    localStorage.setItem(
-      "favorited-facts", JSON.stringify(favorites)
-    );
-  }
-
-  )
+    localStorage.setItem('favorited-facts', JSON.stringify(favorites));
+  });
 
   return (
-    <GameContext.Provider value={{ correct, incorrect, handleUserAnswer, favorites, favoriteFact }}>
+    <GameContext.Provider
+      value={{ correct, incorrect, handleUserAnswer, favorites, favoriteFact, round, startRound }}
+    >
       {' '}
       {children}{' '}
     </GameContext.Provider>
