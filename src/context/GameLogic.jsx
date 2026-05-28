@@ -1,10 +1,20 @@
-import { createContext, useState,  useContext} from 'react';
+import { createContext, useState,  useContext, useEffect} from 'react';
 
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
+
+  const [favorites, setFavorites] = useState(() => {
+    const savedFacts = localStorage.getItem("favorited-facts");
+    
+    if (savedFacts) {
+      return JSON.parse(savedFacts);
+    }
+
+    return [];
+  });
 
   const handleUserAnswer = (isTrue) => {
     if (isTrue) {
@@ -13,8 +23,33 @@ export const GameProvider = ({ children }) => {
       setIncorrect((prev) => prev + 1);
     }
   };
+
+  const favoriteFact = (fact) => {
+    const alreadyFavorited = favorites.find(
+      (favorite) => favorite.id === fact.id
+    );
+    
+    if (alreadyFavorited) {
+      setFavorites(
+        favorites.filter(
+          (favorite) => favorite.id !== fact.id
+        )
+      );
+    } else {
+      setFavorites([...favorites, fact]);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem(
+      "favorited-facts", JSON.stringify(favorites)
+    );
+  }
+
+  )
+
   return (
-    <GameContext.Provider value={{ correct, incorrect, handleUserAnswer }}>
+    <GameContext.Provider value={{ correct, incorrect, handleUserAnswer, favorites, favoriteFact }}>
       {' '}
       {children}{' '}
     </GameContext.Provider>

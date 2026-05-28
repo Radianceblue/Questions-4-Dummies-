@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './QuestionCard.css';
 import { getNotFact } from '../../api/notFacts';
 import { randomFactsApi } from '../../api/randomFactsApi';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import LetterA from '../../assets/LetterA.png';
 import LetterB from '../../assets/LetterB.png';
 import LetterC from '../../assets/LetterC.png';
