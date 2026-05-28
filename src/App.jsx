@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import NextQuestion from './components/NextQuestion/NextQuestion.jsx';
 
 
-import './App.css';
 
 function App() {
   // const [correct, setCorrect] = useState(0);
