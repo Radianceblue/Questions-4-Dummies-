@@ -4,10 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 // import QuestionCard from './components/QuestionCard.jsx/QuestionCard.jsx';
 import App from './App.jsx';
+import { GameProvider } from './context/GameLogic.jsx';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/*<LoadGifs />*/}
 
-  </StrictMode>,
+    <GameProvider>
+      <App />
+      {/* <LoadGifs /> */}
+    </GameProvider>
+
+  </StrictMode>
 );

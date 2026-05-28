@@ -8,6 +8,7 @@ import LetterB from '../../assets/LetterB.png';
 import LetterC from '../../assets/LetterC.png';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useGame } from '../../context/GameLogic';
 
 const questionLetters = [LetterA, LetterB, LetterC];
 const extractWords = (text) => {
@@ -24,6 +25,7 @@ const QuestionCard = () => {
   const answerClick = () => {
     setRevealedAnswer(true);
   };
+  const { handleUserAnswer } = useGame();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +59,11 @@ const QuestionCard = () => {
       <Col md={8}>
         <div className="cards">
           {facts.map((fact, index) => (
-            <div className="card w-25 h-50 p-3 justify-content-center" key={fact.id} onClick={answerClick}>
+            <div
+              className="card w-25 h-50 p-3 justify-content-center"
+              key={index}
+              onClick={() => handleUserAnswer(fact.isTrue)}
+            >
               <div className="card-content">
                 <div className="card-image">
                   <img src={questionLetters[index]} alt="a letter" />
