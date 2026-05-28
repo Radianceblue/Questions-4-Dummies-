@@ -3,20 +3,29 @@ import { createContext, useState,  useContext, useEffect} from 'react';
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
+  
+  //Här håler vi reda på antal rätt svar. 
+  //När sidan laddas försöker vi först läsa in det värde som finns sparat i localstorage.
   const [correct, setCorrect] = useState(() => {
+    
+    //H'r hämtar vi tidigare sparad poäng.
     const correctAnswers = localStorage.getItem("correct-Answers");
-      
+    
+    //om värdet finns sparat så gör vi om texten från localstorage till ett JavaScript värde.
     if(correctAnswers) {
       return JSON.parse(correctAnswers);
-    } 
+    }
+    //om det inte finns ett sparat värde så börjar vi på 0.  
     return 0;
   });
   
+  //Här håler vi reda på antalet fel svar. 
+  //När sidan laddas försöker vi först läsa in det värde som finns sparat i localstorage.
   const [incorrect, setIncorrect] = useState(() => {
-  const IncorrectAnswers = localStorage.getItem("incorrect-Answers");
+  const incorrectAnswers = localStorage.getItem("incorrect-Answers");
       
   if(IncorrectAnswers){
-      return JSON.parse(IncorrectAnswers);
+      return JSON.parse(incorrectAnswers);
     }
     return 0;
 });
@@ -26,7 +35,7 @@ export const GameProvider = ({ children }) => {
   const startRound = () => {
     setRound((prev) => {
       const nextRound = prev + 1;
-      if (prev >= 10) {
+      if (round >= 10) {
         console.log('Game Over!');
         return 10;
       }
@@ -53,6 +62,19 @@ export const GameProvider = ({ children }) => {
       console.log('Incorrect!');
     }
   };
+
+  //Här bevakas state för correct. När det ändras så sparas det nya värdet i localStorage under nyckeln: "correct-Answers."
+  useEffect(() =>{
+    localStorage.setItem("correct-Answers", JSON.stringify(correct));
+  }, [correct]
+  );
+
+
+  //Här bevakas state för incorrect. När det ändras så sparas det nya värdet i localStorage under nyckeln: "Incorrect-Answers."
+  useEffect(()=>{
+    localStorage.setItem("Incorrect-Answers", JSON.stringify(incorrect));
+  },[incorrect]
+);
 
   const favoriteFact = (fact) => {
     const alreadyFavorited = favorites.find(
@@ -90,16 +112,3 @@ export const useGame = () => {
 };
 
 
-
-/*-------------------------------------
-Exempelkod: 
-function saveMovies(movies) {
-    // /*
-    //     Todo: Sparar filmerna till localStorage (JSON-format)
-    // */
-
-  //   let jsonMovies = JSON.stringify(movies); // Konverterar listan till JSON sträng
-  //  localStorage.setItem("movies", jsonMovies); // Spara JSON-listan under nyckeln movies i localStorage
-
-    // Hämtar den sparade datan från localStorage och gör om JSON-strängen till en JavaScript-array
-    // const jsonMovies = JSON.parse(localStorage.getItem("movies"));
