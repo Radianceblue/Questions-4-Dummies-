@@ -29,6 +29,7 @@ const QuestionCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setRevealedAnswer(false);
       try {
         const randomFact = await randomFactsApi();
         const query = extractWords(randomFact);
@@ -61,8 +62,11 @@ const QuestionCard = () => {
           {facts.map((fact, index) => (
             <div
               className="card w-25 h-50 p-3 justify-content-center"
-              key={index}
-              onClick={() => handleUserAnswer(fact.isTrue)}
+              key={fact.id}
+              onClick={() => {
+                handleUserAnswer(fact.isTrue)
+                setRevealedAnswer(true);
+              }}
             >
               <div className="card-content">
                 <div className="card-image">

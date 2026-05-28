@@ -1,12 +1,23 @@
+import fallBackData from '../fallBackData/fallBackData.json';
+
 const BASE_URL = 'https://notfacts.org/api?query=';
 
 const getNotFact = async (query) => {
-    const response = await fetch(`${BASE_URL}${encodeURIComponent(query)}`);
-  if (!response.ok) {
-    console.log(response.statusText);
-    throw new Error('Could not fetch not facts');
+  try {
+      const response = await fetch(`${BASE_URL}${encodeURIComponent(query)}`);
+    if (!response.ok) {
+      console.log(response.statusText);
+      throw new Error('Could not fetch not facts');
+    }
+    const data = await response.json();
+    return data.facts;
+  } catch (error) {
+    console.warn("NotFacts API failed, using fallback", error);
+
+    return fallBackData.facts;
   }
-  const data = await response.json();
-  return data.facts;
-};
+}
+
+
+
 export { getNotFact };
