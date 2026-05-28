@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useGame } from "../../context/GameLogic";
 
 import filledStar from "../../assets/filled_star.png"
@@ -21,7 +19,9 @@ function FavoriteButton({ fact }) {
     }
     
     return (
-        <button onClick={() => favoriteFact(fact)}> {/* !favorited betyder motsatsen av det nuvarande tilståndet */} 
+        <button onClick={(event) => {event.stopPropagation();
+            favoriteFact(fact);
+        }}> 
             <img src={star} alt="a star to like or unlike a fact"/>
         </button>
     )
