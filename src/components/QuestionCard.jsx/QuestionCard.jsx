@@ -20,7 +20,7 @@ const shuffleArray = (array) => {
 };
 const QuestionCard = () => {
   const [facts, setFacts] = useState([]);
-  const { handleUserAnswer } = useGame();
+  const { handleUserAnswer, round } = useGame();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,7 @@ const QuestionCard = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [round]);
 
   return (
     <Row className="justify-content-center">

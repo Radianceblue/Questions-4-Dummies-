@@ -10,6 +10,7 @@ export const GameProvider = ({ children }) => {
   const startRound = () => {
     setRound((prev) => {
       const nextRound = prev + 1;
+      
       if (round >= 10) {
         console.log('Game Over!');
         return 10;
