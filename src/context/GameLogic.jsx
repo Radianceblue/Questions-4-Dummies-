@@ -38,15 +38,12 @@ export const GameProvider = ({ children }) => {
     } else {
       setFavorites([...favorites, fact]);
     }
-  };
+  }
 
   useEffect(() => {
     localStorage.setItem(
-      "favorited-facts", JSON.stringify(favorites)
-    );
-  }
-
-  )
+      "favorited-facts", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <GameContext.Provider value={{ correct, incorrect, handleUserAnswer, favorites, favoriteFact }}>

@@ -19,6 +19,11 @@ const shuffleArray = (array) => {
 };
 const QuestionCard = () => {
   const [facts, setFacts] = useState([]);
+  const [revealedAnswer, setRevealedAnswer] = useState(false);
+
+  const answerClick = () => {
+    setRevealedAnswer(true);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,10 +34,12 @@ const QuestionCard = () => {
 
         const cardOptions = [
           {
+            id: crypto.randomUUID(),
             text: randomFact,
             isTrue: true,
           },
           ...notFacts.slice(0, 2).map((fact) => ({
+            id: crypto.randomUUID(),
             text: fact,
             isTrue: false,
           })),
@@ -50,7 +57,7 @@ const QuestionCard = () => {
       <Col md={8}>
         <div className="cards">
           {facts.map((fact, index) => (
-            <div className="card w-25 h-50 p-3 justify-content-center" key={index}>
+            <div className="card w-25 h-50 p-3 justify-content-center" key={fact.id} onClick={answerClick}>
               <div className="card-content">
                 <div className="card-image">
                   <img src={questionLetters[index]} alt="a letter" />
@@ -59,6 +66,9 @@ const QuestionCard = () => {
                   <div className="card-info">
                     <h3>Option {index + 1} </h3>
                     <p className="h6">{fact.text}</p>
+                    {revealedAnswer && fact.isTrue && (
+                      <FavoriteButton fact={fact} />
+                    )}
                   </div>
                 </div>
               </div>
