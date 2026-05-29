@@ -3,8 +3,6 @@ import Status from './components/Status/Status.jsx';
 import Container from 'react-bootstrap/Container';
 import NextQuestion from './components/NextQuestion/NextQuestion.jsx';
 
-
-
 function App() {
   // const [correct, setCorrect] = useState(0);
   // const [incorrect, setIncorrect] = useState(0);
@@ -27,3 +25,4 @@ function App() {
 }
 
 export default App;
+
