@@ -96,11 +96,9 @@ const QuestionCard = () => {
                     <img src={questionLetters[index]} alt="a letter" />
                   </div>
                   <div className="card-info-wrapper">
-                    <div className="card-info">
                       <h3>Option {index + 1} </h3>
                       <p className="h6">{fact.text}</p>
                       {hasAnswered && fact.isTrue && <FavoriteButton fact={fact} />}
-                    </div>
                   </div>
                 </div>
               </div>
