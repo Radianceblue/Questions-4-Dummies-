@@ -22,15 +22,23 @@ const shuffleArray = (array) => {
 const QuestionCard = () => {
   const [facts, setFacts] = useState([]);
   const [revealedAnswer, setRevealedAnswer] = useState(false);
-
-  const answerClick = () => {
-    setRevealedAnswer(true);
-  };
-  const { handleUserAnswer, round } = useGame();
+  const [selectedAnswerId, setSelectedAnswerId] = useState(null);
+  const { handleUserAnswer, startRound, round } = useGame();
   const [loading, setLoading] = useState(true);
+
+  const handleAnswerClick = (fact) => {
+    if (selectedAnswerId !== null) return;
+    setSelectedAnswerId(fact.id);
+    handleUserAnswer(fact.isTrue);
+
+    setTimeout(() => {
+      startRound();
+    }, 1500);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
+      setSelectedAnswerId(null);
       setRevealedAnswer(false);
       try {
         setLoading(true);
@@ -60,36 +68,46 @@ const QuestionCard = () => {
     fetchData();
   }, [round]);
   if (loading) {
-    console.log('Loading...');
     return <SkeletonCard />;
   }
   return (
     <Row className="justify-content-center">
       <Col md={8}>
         <div className="cards">
-          {facts.map((fact, index) => (
-            <div
-              className="card w-25 h-50 p-3 justify-content-center"
-              key={fact.id}
-              onClick={() => {
-                handleUserAnswer(fact.isTrue);
-                setRevealedAnswer(true);
-              }}
-            >
-              <div className="card-content">
-                <div className="card-image">
-                  <img src={questionLetters[index]} alt="a letter" />
-                </div>
-                <div className="card-info-wrapper">
-                  <div className="card-info">
-                    <h3>Option {index + 1} </h3>
-                    <p className="h6">{fact.text}</p>
-                    {revealedAnswer && fact.isTrue && <FavoriteButton fact={fact} />}
+          {facts.map((fact, index) => {
+            const hasAnswered = selectedAnswerId !== null;
+
+            let cardClass = 'card w-25 h-50 p-3 justify-content-center answer-card';
+
+            if (hasAnswered && fact.isTrue) {
+              cardClass += ' correct-awnser';
+            }
+            if (hasAnswered && !fact.isTrue) {
+              cardClass += ' incorrect-awnser';
+            }
+            return (
+              <div
+                className={cardClass}
+                key={fact.id}
+                onClick={() => {
+                  handleAnswerClick(fact);
+                }}
+              >
+                <div className="card-content">
+                  <div className="card-image">
+                    <img src={questionLetters[index]} alt="a letter" />
+                  </div>
+                  <div className="card-info-wrapper">
+                    <div className="card-info">
+                      <h3>Option {index + 1} </h3>
+                      <p className="h6">{fact.text}</p>
+                      {revealedAnswer && fact.isTrue && <FavoriteButton fact={fact} />}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Col>
     </Row>
