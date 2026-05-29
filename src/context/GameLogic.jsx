@@ -20,15 +20,16 @@ export const GameProvider = ({ children }) => {
   //Här håler vi reda på antalet fel svar.
   //När sidan laddas försöker vi först läsa in det värde som finns sparat i localstorage.
   const [incorrect, setIncorrect] = useState(() => {
-    const incorrectAnswers = localStorage.getItem('incorrect-Answers');
-
-    if (incorrectAnswers) {
+  const incorrectAnswers = localStorage.getItem("incorrect-Answers");
+      
+  if(incorrectAnswers){
       return JSON.parse(incorrectAnswers);
     }
     return 0;
   });
 
   const [round, setRound] = useState(0);
+  const [endCurrentGame, setEndCurrentGame] = useState(false);
 
   const startRound = () => {
     setRound((prev) => {
@@ -40,6 +41,13 @@ export const GameProvider = ({ children }) => {
       return nextRound;
     });
   };
+
+  const resetGame = () => {
+    localStorage.clear(); //vi rensar det som finns sparat i localstorage.
+    setRound(0);      //och så nollställer vi spelrundan.
+    setEndCurrentGame(false); //spelet är inte slut. 
+  };
+    
 
   const [favorites, setFavorites] = useState(() => {
     const savedFacts = localStorage.getItem('favorited-facts');
@@ -82,13 +90,24 @@ export const GameProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem('favorited-facts', JSON.stringify(favorites));
-  }, [favorites]);
+    localStorage.setItem(
+      "favorited-facts", JSON.stringify(favorites)
+    );
+  }
+
+  )
 
   return (
-    <GameContext.Provider
-      value={{ correct, incorrect, round, handleUserAnswer, startRound, favorites, favoriteFact }}
-    >
+    <GameContext.Provider value={{ 
+      correct, 
+      incorrect, 
+      round, 
+      handleUserAnswer, 
+      startRound, 
+      favorites,
+      favoriteFact, 
+      resetGame 
+      }}>
       {' '}
       {children}{' '}
     </GameContext.Provider>
