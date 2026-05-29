@@ -1,14 +1,21 @@
+import { useGame } from "../../context/GameLogic";
 
-function FavoriteFacts(fact) {
+import filledStar from "../../assets/filled_star.png"
+import './FavoriteFacts.css'
 
+function FavoriteFacts() {
+    const {favorites} = useGame();
 
-
+    return (
+        <div className="favorite-facts">
+            <h3>Your saved random true facts <img src={filledStar} alt="a star"/></h3>
+            {favorites.map((fact) => (
+                <div key={fact.id}>
+                    <p>{fact.text}</p>
+                </div>
+            ))}
+        </div>
+    )
 }
-// spara facten
-const chosenFact = JSON.stringify(fact);
-localStorage.setItem("favorited-fact", chosenFact);
 
-//hämta tillbaka factsen
-
-const facts = [];
-const JsonFacts = JSON.parse(localStorage.getItem("favorited-fact"));
+export default FavoriteFacts

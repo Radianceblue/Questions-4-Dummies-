@@ -24,7 +24,7 @@ export const GameProvider = ({ children }) => {
   const [incorrect, setIncorrect] = useState(() => {
   const incorrectAnswers = localStorage.getItem("incorrect-Answers");
       
-  if(IncorrectAnswers){
+  if(incorrectAnswers){
       return JSON.parse(incorrectAnswers);
     }
     return 0;

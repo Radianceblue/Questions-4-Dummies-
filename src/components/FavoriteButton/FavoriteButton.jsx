@@ -2,6 +2,7 @@ import { useGame } from "../../context/GameLogic";
 
 import filledStar from "../../assets/filled_star.png"
 import starFrame from "../../assets/star_frame.png"
+import './FavoriteButton.css';
 
 function FavoriteButton({ fact }) {
     const { favorites, favoriteFact } = useGame();
