@@ -1,4 +1,25 @@
-img{
-    height: 40px;
+.favorite-facts{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.favorite-facts h3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: auto;
+}
+
+img{
+    height: 35px;
+    width: auto;
+}
+
+.card-text{
+    border: 1px solid rgb(100, 94, 94);
+    background-color: rgb(34, 31, 31);
+    padding: 5px;
+    margin-top: 6px;
+    border-radius: 8px;
 }

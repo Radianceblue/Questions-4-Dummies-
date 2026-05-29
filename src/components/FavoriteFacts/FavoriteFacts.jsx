@@ -10,7 +10,7 @@ function FavoriteFacts() {
         <div className="favorite-facts">
             <h3>Your saved random true facts <img src={filledStar} alt="a star"/></h3>
             {favorites.map((fact) => (
-                <div key={fact.id}>
+                <div class="card-text" key={fact.id}>
                     <p>{fact.text}</p>
                 </div>
             ))}
