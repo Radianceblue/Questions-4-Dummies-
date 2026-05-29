@@ -9,6 +9,7 @@ import LetterC from '../../assets/LetterC.png';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useGame } from '../../context/GameLogic';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
 
 const questionLetters = [LetterA, LetterB, LetterC];
 const extractWords = (text) => {
@@ -21,16 +22,26 @@ const shuffleArray = (array) => {
 const QuestionCard = () => {
   const [facts, setFacts] = useState([]);
   const [revealedAnswer, setRevealedAnswer] = useState(false);
+  const [selectedAnswerId, setSelectedAnswerId] = useState(null);
+  const { handleUserAnswer, startRound, round } = useGame();
+  const [loading, setLoading] = useState(true);
 
-  const answerClick = () => {
-    setRevealedAnswer(true);
+  const handleAnswerClick = (fact) => {
+    if (selectedAnswerId !== null) return;
+    setSelectedAnswerId(fact.id);
+    handleUserAnswer(fact.isTrue);
+
+    setTimeout(() => {
+      startRound();
+    }, 1500);
   };
-  const { handleUserAnswer } = useGame();
 
   useEffect(() => {
     const fetchData = async () => {
+      setSelectedAnswerId(null);
       setRevealedAnswer(false);
       try {
+        setLoading(true);
         const randomFact = await randomFactsApi();
         const query = extractWords(randomFact);
         const notFacts = await getNotFact(query);
@@ -50,40 +61,53 @@ const QuestionCard = () => {
         setFacts(shuffleArray(cardOptions));
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
-
+  }, [round]);
+  if (loading) {
+    return <SkeletonCard />;
+  }
   return (
     <Row className="justify-content-center">
       <Col md={8}>
         <div className="cards">
-          {facts.map((fact, index) => (
-            <div
-              className="card w-25 h-50 p-3 justify-content-center"
-              key={fact.id}
-              onClick={() => {
-                handleUserAnswer(fact.isTrue)
-                setRevealedAnswer(true);
-              }}
-            >
-              <div className="card-content">
-                <div className="card-image">
-                  <img src={questionLetters[index]} alt="a letter" />
-                </div>
-                <div className="card-info-wrapper">
-                  <div className="card-info">
-                    <h3>Option {index + 1} </h3>
-                    <p className="h6">{fact.text}</p>
-                    {revealedAnswer && fact.isTrue && (
-                      <FavoriteButton fact={fact} />
-                    )}
+          {facts.map((fact, index) => {
+            const hasAnswered = selectedAnswerId !== null;
+
+            let cardClass = 'card w-25 h-50 p-3 justify-content-center answer-card';
+
+            if (hasAnswered && fact.isTrue) {
+              cardClass += ' correct-awnser';
+            }
+            if (hasAnswered && !fact.isTrue) {
+              cardClass += ' incorrect-awnser';
+            }
+            return (
+              <div
+                className={cardClass}
+                key={fact.id}
+                onClick={() => {
+                  handleAnswerClick(fact);
+                }}
+              >
+                <div className="card-content">
+                  <div className="card-image">
+                    <img src={questionLetters[index]} alt="a letter" />
+                  </div>
+                  <div className="card-info-wrapper">
+                    <div className="card-info">
+                      <h3>Option {index + 1} </h3>
+                      <p className="h6">{fact.text}</p>
+                      {revealedAnswer && fact.isTrue && <FavoriteButton fact={fact} />}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Col>
     </Row>
