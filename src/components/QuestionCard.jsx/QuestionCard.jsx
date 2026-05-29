@@ -9,6 +9,7 @@ import LetterC from '../../assets/LetterC.png';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useGame } from '../../context/GameLogic';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
 
 const questionLetters = [LetterA, LetterB, LetterC];
 const extractWords = (text) => {
@@ -25,12 +26,14 @@ const QuestionCard = () => {
   const answerClick = () => {
     setRevealedAnswer(true);
   };
-  const { handleUserAnswer } = useGame();
+  const { handleUserAnswer, round } = useGame();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setRevealedAnswer(false);
       try {
+        setLoading(true);
         const randomFact = await randomFactsApi();
         const query = extractWords(randomFact);
         const notFacts = await getNotFact(query);
@@ -50,11 +53,16 @@ const QuestionCard = () => {
         setFacts(shuffleArray(cardOptions));
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
-
+  }, [round]);
+  if (loading) {
+    console.log('Loading...');
+    return <SkeletonCard />;
+  }
   return (
     <Row className="justify-content-center">
       <Col md={8}>
@@ -64,7 +72,7 @@ const QuestionCard = () => {
               className="card w-25 h-50 p-3 justify-content-center"
               key={fact.id}
               onClick={() => {
-                handleUserAnswer(fact.isTrue)
+                handleUserAnswer(fact.isTrue);
                 setRevealedAnswer(true);
               }}
             >
@@ -76,9 +84,7 @@ const QuestionCard = () => {
                   <div className="card-info">
                     <h3>Option {index + 1} </h3>
                     <p className="h6">{fact.text}</p>
-                    {revealedAnswer && fact.isTrue && (
-                      <FavoriteButton fact={fact} />
-                    )}
+                    {revealedAnswer && fact.isTrue && <FavoriteButton fact={fact} />}
                   </div>
                 </div>
               </div>
