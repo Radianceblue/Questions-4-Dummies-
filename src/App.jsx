@@ -16,17 +16,15 @@ function App() {
   // }
 
   return (
-    <Container>
-      <div className="App">
-        <h1 className="mt-2">Questions 4 Dummies</h1>
-        <Status />
-        <QuestionCard /> 
-        <NextQuestion />
-        <ResestGameButton/>
-         <Giphs />
-        <FavoriteFacts />
-      </div>
-    </Container>
+    <div className="App">
+      <h1 className="mt-2">Questions 4 Dummies</h1>
+      <Status />
+      <QuestionCard />
+      <NextQuestion />
+      <ResestGameButton />
+      <Giphs />
+      <FavoriteFacts />
+    </div>
   );
 }
 
