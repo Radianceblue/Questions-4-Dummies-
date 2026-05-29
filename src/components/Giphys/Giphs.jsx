@@ -22,7 +22,7 @@ function LoadGifs () {
 
   //State som sparar texten som visas baserat på användarens resultat.
   const [resultSlogan, setResultSlogan] = useState("");
-
+  console.log(resultSlogan);
   /*funktionen körs automatiskt när komponeten har laddats med useEffect.
     Den asynkrona funktionen inväntar att datan ska hämtas från API:et.
     När datan har hämtats sparas Gifsen i state med setGifs().
@@ -30,19 +30,18 @@ function LoadGifs () {
     
     useEffect(() => {
     async function FetchGiphsForResult() {
-      if(game.incorrect <= 5) {
-        const gifs = await getGiphs("knife");
+      if(game.correct <= 5) {
+        const gifs = await getGiphs("pudgy penguins stone knife sharpening");
         setGifs(gifs); // här sparas gifs som hämtats via api:et. 
-        setResultSlogan("You are not the sharpest knife in the toolbox are you"); 
-        
+        setResultSlogan("You are not the sharpest knife in the toolbox are you");         
       } 
-      else if(game.correct <= 6){
+      else if(game.correct >= 6 && game.correct <=8){
         const gifs = await getGiphs("goose");
         setGifs(gifs);
         setResultSlogan("Not to bad, you silly goose!");
       }
       else if (game.correct >= 9){
-        const gifs = await getGiphs("cookie");
+        const gifs = await getGiphs("dancing cookie");
         setGifs(gifs);
         setResultSlogan("Hey! We have a smart cookie, or maybe you just got lucky?!");
       }

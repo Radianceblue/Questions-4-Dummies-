@@ -1,0 +1,41 @@
+/* Custom button styling */
+.reset-btn {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(
+    45deg,
+    rgb(78, 221, 171) 0%,
+    rgb(16, 152, 95) 100%,
+    rgba(255, 255, 255, 1) 0%
+  );
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 15px rgba(55, 52, 57, 0.6);
+}
+
+.reset-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(55, 52, 57, 0.9);
+}
+
+.reset-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 20%, transparent 60%);
+  transform: rotate(25deg);
+  animation: shine 3s infinite linear;
+}
+h2 {
+  margin-top: 20px;
+  color: white;
+}
+
