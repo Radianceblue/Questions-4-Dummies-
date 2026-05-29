@@ -13,17 +13,17 @@ function App() {
   //   if(selectedOption.isTrue) {
   //     // Släng in poäng hantering
   //   })
-  // }o
+  // }
 
   return (
     <Container>
       <div className="App">
         <h1 className="mt-2">Questions 4 Dummies</h1>
-        <Giphs />
         <Status />
-        <QuestionCard />
+        <QuestionCard /> 
         <NextQuestion />
-        <ResestGameButton />
+        <ResestGameButton/>
+         <Giphs />
         <FavoriteFacts />
       </div>
     </Container>
