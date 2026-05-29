@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import getGiphs from '../../api/giphyApi';
 import { useGame } from "../../context/GameLogic";
+import "./Giphs.css";
 
 
 function LoadGifs () {
@@ -29,6 +30,10 @@ function LoadGifs () {
     Den tomma arrayen [] gör att useEffect ska köras en gång när komponenten renderas första gången. */
     
     useEffect(() => {
+
+    if (game.round !== 10)
+      return;  
+    
     async function FetchGiphsForResult() {
       if(game.correct <= 5) {
         const gifs = await getGiphs("pudgy penguins stone knife sharpening");
@@ -46,9 +51,8 @@ function LoadGifs () {
         setResultSlogan("Hey! We have a smart cookie, or maybe you just got lucky?!");
       }
     }
-    FetchGiphsForResult();
-  
-  }, []);
+    FetchGiphsForResult()
+  }, [game.round, game.correct]);
 
 console.log(gifs[0]); 
 
@@ -61,6 +65,7 @@ console.log(gifs[0]);
           <img 
           src={gif.images.fixed_height.url}
           alt={gif.title}
+          className='GIF-result'
           />
         </div>
     ))}
