@@ -10,7 +10,7 @@ body {
   height: 100vh;
   justify-content: center;
   margin: 0px;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0px;
 }
 
