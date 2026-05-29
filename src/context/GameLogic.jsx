@@ -21,8 +21,10 @@ export const GameProvider = ({ children }) => {
 
   //Här håler vi reda på antalet fel svar.
   //När sidan laddas försöker vi först läsa in det värde som finns sparat i localstorage.
-  const [incorrect, setIncorrect] = useState(() => {
+  const [incorrect, setIncorrect,] = useState(() => {
   const incorrectAnswers = localStorage.getItem("incorrect-Answers");
+
+
 
   if(incorrectAnswers){
       return JSON.parse(incorrectAnswers);
@@ -54,12 +56,15 @@ export const GameProvider = ({ children }) => {
   });
 
   const handleUserAnswer = (isTrue) => {
+
     if (isTrue) {
       setCorrect((prev) => prev + 1);
       console.log('Correct!');
+
     } else {
       setIncorrect((prev) => prev + 1);
       console.log('Incorrect!');
+      
     }
   };
 
