@@ -20,10 +20,10 @@ function App() {
       <div className="App">
         <h1 className="mt-2">Questions 4 Dummies</h1>
         <Giphs />
-        {/* <Status />
-        <QuestionCard /> */}
+        <Status />
+        <QuestionCard />
         <NextQuestion />
-        <ResestGameButton/>
+        <ResestGameButton />
         <FavoriteFacts />
       </div>
     </Container>
@@ -31,4 +31,3 @@ function App() {
 }
 
 export default App;
-

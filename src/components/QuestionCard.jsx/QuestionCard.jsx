@@ -21,7 +21,6 @@ const shuffleArray = (array) => {
 };
 const QuestionCard = () => {
   const [facts, setFacts] = useState([]);
-  const [revealedAnswer, setRevealedAnswer] = useState(false);
   const [selectedAnswerId, setSelectedAnswerId] = useState(null);
   const { handleUserAnswer, startRound, round } = useGame();
   const [loading, setLoading] = useState(true);
@@ -33,13 +32,12 @@ const QuestionCard = () => {
 
     setTimeout(() => {
       startRound();
-    }, 1500);
+    }, 5500);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       setSelectedAnswerId(null);
-      setRevealedAnswer(false);
       try {
         setLoading(true);
         const randomFact = await randomFactsApi();
@@ -101,7 +99,7 @@ const QuestionCard = () => {
                     <div className="card-info">
                       <h3>Option {index + 1} </h3>
                       <p className="h6">{fact.text}</p>
-                      {revealedAnswer && fact.isTrue && <FavoriteButton fact={fact} />}
+                      {hasAnswered && fact.isTrue && <FavoriteButton fact={fact} />}
                     </div>
                   </div>
                 </div>
