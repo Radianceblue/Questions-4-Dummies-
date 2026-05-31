@@ -4,13 +4,9 @@
 }
 
 body {
-  align-items: center;
   background-color: var(--bg-color);
-  display: flex;
-  height: 100vh;
-  justify-content: center;
+  min-height: 100vh;
   margin: 0px;
-  overflow: hidden;
   padding: 0px;
 }
 
@@ -54,4 +50,21 @@ body {
 .correct-awnser {
   transform: translateY(-5px);
   box-shadow: 0px 3px 3px 2px rgba(0, 255, 34, 0.213);
+}
+
+@media (max-width: 790px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  answer-card {
+    width: 100%;
+    max-width: 300px;
+    min-height: auto;
+  }
+
+  .card-image {
+    max-width: 70px;
+  }
 }
