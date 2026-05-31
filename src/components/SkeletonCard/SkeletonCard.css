@@ -5,7 +5,11 @@
 
   --avatar-size: 32px;
   --avatar-position: 124px 32px;
-  --avatar-skeleton: radial-gradient(circle 16px at center, rgba(90, 90, 90, 0.652) 99%, transparent 0);
+  --avatar-skeleton: radial-gradient(
+    circle 16px at center,
+    rgba(90, 90, 90, 0.652) 99%,
+    transparent 0
+  );
 
   --title-height: 32px;
   --title-width: 200px;
@@ -82,5 +86,18 @@
       var(--avatar-position),
       var(--footer-position),
       0 0;
+  }
+}
+
+@media (max-width: 790px) {
+  .question-card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  quiz-skeleton-card {
+    width: 100%;
+    max-width: 300px;
+    min-height: auto;
   }
 }
