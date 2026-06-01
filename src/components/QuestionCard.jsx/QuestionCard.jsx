@@ -29,10 +29,6 @@ const QuestionCard = () => {
     if (selectedAnswerId !== null) return;
     setSelectedAnswerId(fact.id);
     handleUserAnswer(fact.isTrue);
-
-    setTimeout(() => {
-      startRound();
-    }, 5500);
   };
 
   useEffect(() => {
