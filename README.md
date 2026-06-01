@@ -13,7 +13,7 @@ A fun quiz game with true and false facts for you to guess. Collect points and s
     - JavaScript
     - React
     - Vite
-    - Bootstrap
+    - Reacts Bootstrap
     - Css
 
 # File tree
