@@ -7,13 +7,7 @@ import ResestGameButton from './components/ResetGameButton/ResetGameButton.jsx';
 import FavoriteFacts from './components/FavoriteFacts/FavoriteFacts.jsx';
 
 function App() {
-  // const [correct, setCorrect] = useState(0);
-  // const [incorrect, setIncorrect] = useState(0);
-  // const handleUserAnswer = (selectedOption) => {
-  //   if(selectedOption.isTrue) {
-  //     // Släng in poäng hantering
-  //   })
-  // }
+
 
   return (
     <div className="App">
