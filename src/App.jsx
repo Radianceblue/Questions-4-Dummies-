@@ -8,7 +8,6 @@ import FavoriteFacts from './components/FavoriteFacts/FavoriteFacts.jsx';
 
 function App() {
 
-
   return (
     <div className="App">
       <h1 className="mt-2">Questions 4 Dummies</h1>

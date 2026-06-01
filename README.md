@@ -137,7 +137,7 @@ const query = extractWords(randomFact);
 ```
 
 #### giphyApi
-The giphyApi uses *giphys* offical API to fetch giphs. Depending on how many points the player have got after 10 round, a gif is presented for the users score.
+The giphyApi uses *giphys* offical API to fetch giphs. Depending on how many points the player have got after the 10th round, a gif is presented of the users score.
 
 ```http
   GET /v1/gifs/search?api_key=&q=${query}&limit=1`
