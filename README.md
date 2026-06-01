@@ -1,3 +1,9 @@
+ ███  █   █ █████  ████ █████ ███  ███  █   █  ████    █  █     ████  █   █ █   █ █   █ ███ █████  ████ 
+█   █ █   █ █     █       █    █  █   █ ██  █ █        █  █     █   █ █   █ ██ ██ ██ ██  █  █     █     
+█   █ █   █ ████   ███    █    █  █   █ █ █ █  ███     █████    █   █ █   █ █ █ █ █ █ █  █  ████   ███  
+█  █  █   █ █         █   █    █  █   █ █  ██     █       █     █   █ █   █ █   █ █   █  █  █         █ 
+ ██ █  ███  █████ ████    █   ███  ███  █   █ ████        █     ████   ███  █   █ █   █ ███ █████ ████  
+
 # Questions-4-Dummies-
 
 A fun quiz game with true and false facts for you to guess. Collect points and see dummie status. If you see a fact you like you can always save it for later.
