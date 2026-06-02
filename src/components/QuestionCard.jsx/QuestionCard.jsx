@@ -1,10 +1,15 @@
-import './QuestionCard.css';
 import { useState, useEffect } from 'react';
+import './QuestionCard.css';
 import { getNotFact } from '../../api/notFacts';
 import { randomFactsApi } from '../../api/randomFactsApi';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import LetterA from '../../assets/LetterA.png';
 import LetterB from '../../assets/LetterB.png';
 import LetterC from '../../assets/LetterC.png';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { useGame } from '../../context/GameLogic';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
 
 const questionLetters = [LetterA, LetterB, LetterC];
 const extractWords = (text) => {
@@ -16,20 +21,33 @@ const shuffleArray = (array) => {
 };
 const QuestionCard = () => {
   const [facts, setFacts] = useState([]);
+  const [selectedAnswerId, setSelectedAnswerId] = useState(null);
+  const { handleUserAnswer, startRound, round } = useGame();
+  const [loading, setLoading] = useState(true);
+
+  const handleAnswerClick = (fact) => {
+    if (selectedAnswerId !== null) return;
+    setSelectedAnswerId(fact.id);
+    handleUserAnswer(fact.isTrue);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
+      setSelectedAnswerId(null);
       try {
+        setLoading(true);
         const randomFact = await randomFactsApi();
         const query = extractWords(randomFact);
         const notFacts = await getNotFact(query);
 
         const cardOptions = [
           {
+            id: crypto.randomUUID(),
             text: randomFact,
             isTrue: true,
           },
           ...notFacts.slice(0, 2).map((fact) => ({
+            id: crypto.randomUUID(),
             text: fact,
             isTrue: false,
           })),
@@ -37,30 +55,54 @@ const QuestionCard = () => {
         setFacts(shuffleArray(cardOptions));
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [round]);
+  if (loading) {
+    return <SkeletonCard />;
+  }
   return (
-    <div className="cards">
-      {facts.map((fact, index) => (
-        <div className="card" key={index}>
-          <div className="card-content">
-            <div className="card-image">
-              <img src={questionLetters[index]} alt="a letter" />
-            </div>
-            <div className="card-info-wrapper">
-              <div className="card-info">
-                <div className="card-info-title">
-                  <h3>Option {index + 1} </h3>
-                  <h4>{fact.text}</h4>
+    <Row className="justify-content-center">
+      <Col md={8}>
+        <div className="cards">
+          {facts.map((fact, index) => {
+            const hasAnswered = selectedAnswerId !== null;
+
+            let cardClass = 'card w-25 h-50 p-3 justify-content-center answer-card';
+
+            if (hasAnswered && fact.isTrue) {
+              cardClass += ' correct-awnser';
+            }
+            if (hasAnswered && !fact.isTrue) {
+              cardClass += ' incorrect-awnser';
+            }
+            return (
+              <div
+                className={cardClass}
+                key={fact.id}
+                onClick={() => {
+                  handleAnswerClick(fact);
+                }}
+              >
+                <div className="card-content">
+                  <div className="card-image">
+                    <img src={questionLetters[index]} alt="a letter" />
+                  </div>
+                  <div className="card-info-wrapper">
+                      <h3>Option {index + 1} </h3>
+                      <p className="h6">{fact.text}</p>
+                      {hasAnswered && fact.isTrue && <FavoriteButton fact={fact} />}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
-      ))}
-    </div>
+      </Col>
+    </Row>
   );
 };
 
