@@ -23,7 +23,8 @@ function LoadGifs () {
 
   //State som sparar texten som visas baserat på användarens resultat.
   const [resultSlogan, setResultSlogan] = useState("");
-  console.log(resultSlogan);
+
+
   /*funktionen körs automatiskt när komponeten har laddats med useEffect.
     Den asynkrona funktionen inväntar att datan ska hämtas från API:et.
     När datan har hämtats sparas Gifsen i state med setGifs().
@@ -53,8 +54,6 @@ function LoadGifs () {
     }
     FetchGiphsForResult()
   }, [game.round, game.correct]);
-
-console.log(gifs[0]); 
 
   return (
   <div>
