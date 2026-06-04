@@ -1,4 +1,4 @@
-
+![Questions 4 Dummies banner](./public/The ones who are crazy enough to think they can change the world, are the ones who do..png)
 # Questions-4-Dummies-
 
 A fun quiz game with true and false facts for you to guess. Collect points and see dummie status. If you see a fact you like you can always save it for later.
