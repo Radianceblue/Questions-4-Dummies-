@@ -1,4 +1,5 @@
-![Questions 4 Dummies banner](./public/The ones who are crazy enough to think they can change the world, are the ones who do..png)
+![Questions 4 Dummies banner](./public/ReadmeBanner.png)
+
 # Questions-4-Dummies-
 
 A fun quiz game with true and false facts for you to guess. Collect points and see dummie status. If you see a fact you like you can always save it for later.
@@ -21,6 +22,7 @@ A fun quiz game with true and false facts for you to guess. Collect points and s
     - Css
 
 # File tree
+
 ```bash
 src
 ├── App.css
@@ -78,29 +80,29 @@ src
 
    ```bash
    git clone https://github.com/Radianceblue/Questions-4-Dummies-.git
-    ```
-2. Navigate to the project folder
-    ```bash
-    cd Questions-4-Dummies-
-    ```
-3. Install dependencies
-    ```bash
-    npm install
-    ```
-4. Create a .env file in the root of the project
-    ```bash
-    touch .env
-    ```
-5. Add your Giphy API key to the .env file
-    ```bash
-    VITE_GIPHY_API_KEY=your_api_key_here
-    ```
-6. Run the program
-    ```bash
-    npm run dev
-    ```
-7. Open the local link provided in the terminal
+   ```
 
+2. Navigate to the project folder
+   ```bash
+   cd Questions-4-Dummies-
+   ```
+3. Install dependencies
+   ```bash
+   npm install
+   ```
+4. Create a .env file in the root of the project
+   ```bash
+   touch .env
+   ```
+5. Add your Giphy API key to the .env file
+   ```bash
+   VITE_GIPHY_API_KEY=your_api_key_here
+   ```
+6. Run the program
+   ```bash
+   npm run dev
+   ```
+7. Open the local link provided in the terminal
 
 npm create vite@latest Dummies_Quiz -- --template react
 
@@ -116,15 +118,20 @@ src/api
 ├── notFacts.js
 └── randomFactsApi.js
 ```
+
 #### randomFactsApi
-randomFactsApi uses the API *random useless facts* with the endpoint:
+
+randomFactsApi uses the API _random useless facts_ with the endpoint:
+
 ```text
 GET /api/v2/facts/random
 ```
+
 This fetches a random true fact in JSON format which is later used for the question cards and for search query in the notFacts request.
 
 #### notFacts
-notFacts uses the API *False Facts API*. The API takes a search query in the request which generates 6 false belivable "facts" using Claude. This enables us to have somewhat of a theme in the question. To achive this we wait for the response from *randomFactsApi* and slices out the two first words in the response which will be used in the notFacts search request:
+
+notFacts uses the API _False Facts API_. The API takes a search query in the request which generates 6 false belivable "facts" using Claude. This enables us to have somewhat of a theme in the question. To achive this we wait for the response from _randomFactsApi_ and slices out the two first words in the response which will be used in the notFacts search request:
 
 ```text
 GET /api?query={your_topic}
@@ -138,22 +145,23 @@ const query = extractWords(randomFact);
 ```
 
 #### giphyApi
-The giphyApi uses *giphys* offical API to fetch giphs. Depending on how many points the player have got after the 10th round, a gif is presented of the users score.
+
+The giphyApi uses _giphys_ offical API to fetch giphs. Depending on how many points the player have got after the 10th round, a gif is presented of the users score.
 
 ```http
   GET /v1/gifs/search?api_key=&q=${query}&limit=1`
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `query`      | `string` | **Required**. api_key |
+| Parameter | Type     | Description           |
+| :-------- | :------- | :-------------------- |
+| `query`   | `string` | **Required**. api_key |
 
     async function FetchGiphsForResult() {
       if(game.correct <= 5) {
         const gifs = await getGiphs("pudgy penguins stone knife sharpening");
-        setGifs(gifs); // här sparas gifs som hämtats via api:et. 
-        setResultSlogan("You are not the sharpest knife in the toolbox are you");         
-      } 
+        setGifs(gifs); // här sparas gifs som hämtats via api:et.
+        setResultSlogan("You are not the sharpest knife in the toolbox are you");
+      }
       else if(game.correct >= 6 && game.correct <=8){
         const gifs = await getGiphs("goose");
         setGifs(gifs);
@@ -165,12 +173,11 @@ The giphyApi uses *giphys* offical API to fetch giphs. Depending on how many poi
         setResultSlogan("Hey! We have a smart cookie, or maybe you just got lucky?!");
       }
     }
-                        
 
 ## Contributors
 
-| GitHub | Name |
-| :--- | :--- |
-| [@Tilly-py](https://github.com/Tilly-py) | Alexander |
-| [@PyA99](https://github.com/PyA99) | PyA99 |
+| GitHub                                           | Name         |
+| :----------------------------------------------- | :----------- |
+| [@Tilly-py](https://github.com/Tilly-py)         | Alexander    |
+| [@PyA99](https://github.com/PyA99)               | PyA99        |
 | [@Radianceblue](https://github.com/Radianceblue) | Marina Radic |
