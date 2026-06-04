@@ -1,6 +1,5 @@
 import QuestionCard from './components/QuestionCard.jsx/QuestionCard.jsx';
 import Status from './components/Status/Status.jsx';
-import Container from 'react-bootstrap/Container';
 import NextQuestion from './components/NextQuestion/NextQuestion.jsx';
 import Giphs from './components/Giphys/Giphs.jsx';
 import ResetGameButton from './components/ResetGameButton/ResetGameButton.jsx';
