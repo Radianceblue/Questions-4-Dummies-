@@ -2,6 +2,10 @@ import fallBackData from '../fallBackData/fallBackData.json';
 
 const BASE_URL = 'https://notfacts.org/api?query=';
 
+const shuffleArray = (array) => {
+  return [...array].sort(() => Math.random() - 0.5);
+};
+
 const getNotFact = async (query) => {
   try {
       const response = await fetch(`${BASE_URL}${encodeURIComponent(query)}`);
@@ -14,7 +18,7 @@ const getNotFact = async (query) => {
   } catch (error) {
     console.warn("NotFacts API failed, using fallback", error);
 
-    return fallBackData.facts;
+    return shuffleArray(fallBackData.facts);
   }
 }
 
