@@ -60,6 +60,10 @@ export const GameProvider = ({ children }) => {
     setRound(0);      //och så nollställer vi spelrundan.
     setEndCurrentGame(false); //spelet är inte slut. 
   };
+
+  useEffect(() => { // Gör så poängen nollställs när appen startar
+  resetGame();
+}, []);
     
 
   const handleUserAnswer = (isTrue) => {

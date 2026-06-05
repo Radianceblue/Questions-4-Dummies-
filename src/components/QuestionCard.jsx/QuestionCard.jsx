@@ -67,11 +67,11 @@ const QuestionCard = () => {
   return (
     <Row className="justify-content-center">
       <Col md={8}>
-        <div className="cards">
+        <div className="question-cards">
           {facts.map((fact, index) => {
             const hasAnswered = selectedAnswerId !== null;
 
-            let cardClass = 'card w-25 h-50 p-3 justify-content-center answer-card';
+            let cardClass = 'question-card answer-card">';
 
             if (hasAnswered && fact.isTrue) {
               cardClass += ' correct-awnser';
