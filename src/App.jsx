@@ -9,17 +9,6 @@ import { useGame } from '../src/context/GameLogic.jsx';
 function App() {
   const game = useGame();
 
-  if(game.round >=10){
-    return (
-      <div>
-        <h1 className="mt-2">Questions 4 Dummies</h1>
-        <Status />
-        <ResetGameButton />
-        <Giphs />
-        <FavoriteFacts />   
-      </div>)
-  }  else   {
-
       return (
       <div className="App">
         <h1 className="mt-2">Questions 4 Dummies</h1>
@@ -32,8 +21,5 @@ function App() {
       </div>
     );
   } 
-}
-
-
 
 export default App;
