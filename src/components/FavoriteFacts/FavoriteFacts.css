@@ -4,6 +4,9 @@ img {
 }
 
 .favorite-fact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 2px;
   border-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
