@@ -1,6 +1,6 @@
 :root {
-  --bg-color: rgb(20, 20, 20);
-  --card-color: rgb(23, 23, 23);
+  --bg-color: rgb(45, 43, 43);
+  --card-color: rgb(87, 78, 78);
 }
 
 body {
@@ -20,7 +20,7 @@ body {
 }
 
 .question-card {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(112, 106, 106, 0.1);
   border-radius: 10px;
   cursor: pointer;
   display: flex;
@@ -47,7 +47,7 @@ body {
 
 .question-card > .card-content:hover{
   transform: scale(1.1);
-  background-color: rgb(90, 78, 78);
+  background-color: rgb(123, 118, 118);
   transition: transform 0.3s, background-color 0.3s ease
 }
 
@@ -81,4 +81,16 @@ body {
   .card-image {
     max-width: 70px;
   }
+}
+
+.card-info-wrapper h3 {
+  color: white;
+}
+
+.card-info-wrapper p {
+  color: rgb(235, 227, 227);
+}
+
+h3{
+  color: rgb(235, 227, 227);
 }
