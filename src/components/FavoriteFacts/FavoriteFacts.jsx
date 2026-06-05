@@ -1,5 +1,4 @@
 import { useGame } from '../../context/GameLogic';
-import filledStar from '../../assets/filled_star.png';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import './FavoriteFacts.css';
 
