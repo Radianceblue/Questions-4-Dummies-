@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 
     return ( 
     <div className="reset-game">
-      <h2>Game over. </h2> 
+      <h2>Game over</h2> 
       <Button className="Button btn-glow reset-btn" onClick={resetGame}> New round </Button>
     </div>
 

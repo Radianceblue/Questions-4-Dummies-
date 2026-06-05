@@ -5,3 +5,48 @@
     margin-top: 20px;
 }
 
+.game-result-modal .modal-content {
+  background-color: #434344dd;
+  color: white;
+  display: flex;
+  justify-content: center ;
+}
+
+.gif-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.game-result-modal .modal-body {
+  text-align: center;
+}
+.game-result-modal .modal-header{
+    justify-content: center;  
+}
+.game-result-modal .modal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-over-text {
+  margin: 0;
+  text-align: center;
+}
+
+.result-score{
+    font-weight: bold;
+
+}
+
+.GIF-result {
+  border-radius: 10px;
+}
